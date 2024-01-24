@@ -4,9 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download Content</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #downloadedImageContainer,
+        #downloadedMusicContainer {
+            margin-top: 20px;
+        }
+
+        #downloadedImageContainer img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        #downloadedMusicContainer audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
     <script>
         window.onload = function() {
             alert("Warning: Downloading copyrighted material without permission may violate the law. If you choose to download content, it is your responsibility to ensure compliance with copyright and licensing terms.");
+        }
+
+        function downloadImage() {
+            var imageUrl = document.getElementById('imageUrl').value;
+
+            if (imageUrl) {
+                var link = document.createElement('a');
+                link.href = imageUrl;
+                link.download = 'downloaded_image';
+                link.click();
+            } else {
+                alert('Please enter a valid image URL.');
+            }
+        }
+
+        function downloadMusic() {
+            var musicUrl = document.getElementById('musicUrl').value;
+
+            if (musicUrl) {
+                var link = document.createElement('a');
+                link.href = musicUrl;
+                link.download = 'downloaded_music.mp3';
+                link.click();
+            } else {
+                alert('Please enter a valid music URL.');
+            }
         }
     </script>
 </head>
@@ -23,46 +102,5 @@
 
     <div id="downloadedImageContainer"></div>
     <div id="downloadedMusicContainer"></div>
-
-    <script>
-        function downloadImage() {
-            var imageUrl = document.getElementById('imageUrl').value;
-            var downloadedImageContainer = document.getElementById('downloadedImageContainer');
-
-            if (imageUrl) {
-                downloadedImageContainer.innerHTML = `<img src="${imageUrl}" alt="Downloaded Image">`;
-
-                var downloadLink = document.createElement('a');
-                downloadLink.href = imageUrl;
-                downloadLink.download = 'downloaded_image';
-                downloadLink.innerHTML = 'Download Image';
-                downloadedImageContainer.appendChild(downloadLink);
-            } else {
-                alert('Please enter a valid image URL.');
-            }
-        }
-
-        function downloadMusic() {
-            var musicUrl = document.getElementById('musicUrl').value;
-            var downloadedMusicContainer = document.getElementById('downloadedMusicContainer');
-
-            if (musicUrl) {
-                downloadedMusicContainer.innerHTML = `
-                    <audio controls>
-                        <source src="${musicUrl}" type="audio/mp3">
-                        Your browser does not support the audio tag.
-                    </audio>
-                `;
-
-                var downloadLink = document.createElement('a');
-                downloadLink.href = musicUrl;
-                downloadLink.download = 'downloaded_music.mp3';
-                downloadLink.innerHTML = 'Download Music';
-                downloadedMusicContainer.appendChild(downloadLink);
-            } else {
-                alert('Please enter a valid music URL.');
-            }
-        }
-    </script>
 </body>
 </html>
