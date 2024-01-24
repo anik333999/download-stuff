@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Content</title>
+    <script>
+        window.onload = function() {
+            alert("Warning: Downloading copyrighted material without permission may violate the law. If you choose to download content, it is your responsibility to ensure compliance with copyright and licensing terms.");
+        }
+    </script>
+</head>
+<body>
+    <h1>Download Content</h1>
+    
+    <label for="imageUrl">Image URL:</label>
+    <input type="text" id="imageUrl" placeholder="Enter Image URL">
+    <button onclick="downloadImage()">Download Image</button>
+    
+    <label for="musicUrl">Music URL:</label>
+    <input type="text" id="musicUrl" placeholder="Enter Music URL">
+    <button onclick="downloadMusic()">Download Music</button>
+
+    <div id="downloadedImageContainer"></div>
+    <div id="downloadedMusicContainer"></div>
+
+    <script>
+        function downloadImage() {
+            var imageUrl = document.getElementById('imageUrl').value;
+            var downloadedImageContainer = document.getElementById('downloadedImageContainer');
+
+            if (imageUrl) {
+                downloadedImageContainer.innerHTML = `<img src="${imageUrl}" alt="Downloaded Image">`;
+
+                var downloadLink = document.createElement('a');
+                downloadLink.href = imageUrl;
+                downloadLink.download = 'downloaded_image';
+                downloadLink.innerHTML = 'Download Image';
+                downloadedImageContainer.appendChild(downloadLink);
+            } else {
+                alert('Please enter a valid image URL.');
+            }
+        }
+
+        function downloadMusic() {
+            var musicUrl = document.getElementById('musicUrl').value;
+            var downloadedMusicContainer = document.getElementById('downloadedMusicContainer');
+
+            if (musicUrl) {
+                downloadedMusicContainer.innerHTML = `
+                    <audio controls>
+                        <source src="${musicUrl}" type="audio/mp3">
+                        Your browser does not support the audio tag.
+                    </audio>
+                `;
+
+                var downloadLink = document.createElement('a');
+                downloadLink.href = musicUrl;
+                downloadLink.download = 'downloaded_music.mp3';
+                downloadLink.innerHTML = 'Download Music';
+                downloadedMusicContainer.appendChild(downloadLink);
+            } else {
+                alert('Please enter a valid music URL.');
+            }
+        }
+    </script>
+</body>
+</html>
