@@ -6,12 +6,23 @@
     <title>Download Content</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             color: #333;
+            text-align: center;
         }
 
         label {
@@ -35,25 +46,22 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
         }
 
         button:hover {
             background-color: #45a049;
         }
 
-        #downloadedImageContainer,
-        #downloadedMusicContainer {
+        .content-container {
             margin-top: 20px;
         }
 
-        #downloadedImageContainer img {
+        .content-container img,
+        .content-container audio {
+            width: 100%;
             max-width: 100%;
             height: auto;
-            margin-top: 10px;
-        }
-
-        #downloadedMusicContainer audio {
-            width: 100%;
             margin-top: 10px;
         }
     </style>
@@ -69,6 +77,7 @@
                 var link = document.createElement('a');
                 link.href = imageUrl;
                 link.download = 'downloaded_image';
+                link.target = '_blank'; // Open in a new tab
                 link.click();
             } else {
                 alert('Please enter a valid image URL.');
@@ -82,6 +91,7 @@
                 var link = document.createElement('a');
                 link.href = musicUrl;
                 link.download = 'downloaded_music.mp3';
+                link.target = '_blank'; // Open in a new tab
                 link.click();
             } else {
                 alert('Please enter a valid music URL.');
@@ -90,17 +100,19 @@
     </script>
 </head>
 <body>
-    <h1>Download Content</h1>
-    
-    <label for="imageUrl">Image URL:</label>
-    <input type="text" id="imageUrl" placeholder="Enter Image URL">
-    <button onclick="downloadImage()">Download Image</button>
-    
-    <label for="musicUrl">Music URL:</label>
-    <input type="text" id="musicUrl" placeholder="Enter Music URL">
-    <button onclick="downloadMusic()">Download Music</button>
+    <div class="container">
+        <h1>Download Content</h1>
+        
+        <label for="imageUrl">Image URL:</label>
+        <input type="text" id="imageUrl" placeholder="Enter Image URL">
+        <button onclick="downloadImage()">Download Image</button>
+        
+        <label for="musicUrl">Music URL:</label>
+        <input type="text" id="musicUrl" placeholder="Enter Music URL">
+        <button onclick="downloadMusic()">Download Music</button>
 
-    <div id="downloadedImageContainer"></div>
-    <div id="downloadedMusicContainer"></div>
+        <div class="content-container" id="downloadedImageContainer"></div>
+        <div class="content-container" id="downloadedMusicContainer"></div>
+    </div>
 </body>
 </html>
